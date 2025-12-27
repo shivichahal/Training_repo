@@ -1,7 +1,4 @@
 
-provider "aws" {
-  region = "us-east-2"
-}
 
 resource "aws_s3_bucket" "my_data_bucket" {
   # The bucket name must be globally unique across all AWS users
