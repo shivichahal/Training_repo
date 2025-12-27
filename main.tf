@@ -30,7 +30,7 @@ data "archive_file" "lambda_zip" {
 }
 
 # Creates the Role for Lambda
-resource "aws_iam_role_ci/cd" "lambda_role" {
+resource "aws_iam_role_cicd" "lambda_role" {
   name = "my_lambda_execution_role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
