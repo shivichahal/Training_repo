@@ -52,11 +52,3 @@ resource "aws_lambda_function" "my_lambda" {
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
 }
 
-resource "aws_lambda_function" "my_lambda" {
-  filename         = data.archive_file.lambda_zip.output_path
-  function_name    = "my_lambda_two"
-  role             = aws_iam_role.lambda_role.arn
-  handler          = "index.handler_two"
-  runtime          = "python3.9"
-  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
-}
