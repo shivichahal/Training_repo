@@ -30,8 +30,8 @@ data "archive_file" "lambda_zip" {
 }
 
 # Creates the Role for Lambda
-resource "aws_iam_role_cicd" "lambda_role" {
-  name = "my_lambda_execution_role"
+resource "aws_iam_role" "lambda_role" {
+  name = "my_lambda_execution_role_cicd"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -43,7 +43,7 @@ resource "aws_iam_role_cicd" "lambda_role" {
 }
 
 # Creates the Lambda Function
-resource "aws_lambda_function" "my_lambda_one" {
+resource "aws_lambda_function" "my_lambda" {
   filename         = data.archive_file.lambda_zip.output_path
   function_name    = "my_lambda_one"
   role             = aws_iam_role.lambda_role.arn
@@ -52,7 +52,7 @@ resource "aws_lambda_function" "my_lambda_one" {
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
 }
 
-resource "aws_lambda_function" "my_lambda_two" {
+resource "aws_lambda_function" "my_lambda" {
   filename         = data.archive_file.lambda_zip.output_path
   function_name    = "my_lambda_two"
   role             = aws_iam_role.lambda_role.arn
