@@ -1,7 +1,7 @@
 
 resource "aws_s3_bucket" "my_data_bucket" {
   # The bucket name must be globally unique across all AWS users
-  bucket = "my-unique-terraform-bucket-2025-12-26" 
+  bucket = "my-unique-terraform-bucket-2025-12-27" 
 
   tags = {
     Name        = "My Terraform Bucket"
@@ -30,7 +30,7 @@ data "archive_file" "lambda_zip" {
 }
 
 # Creates the Role for Lambda
-resource "aws_iam_role" "lambda_role" {
+resource "aws_iam_role_ci/cd" "lambda_role" {
   name = "my_lambda_execution_role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -43,9 +43,9 @@ resource "aws_iam_role" "lambda_role" {
 }
 
 # Creates the Lambda Function
-resource "aws_lambda_function" "my_lambda" {
+resource "aws_lambda_function" "my_lambda_one" {
   filename         = data.archive_file.lambda_zip.output_path
-  function_name    = "my_new_lambda"
+  function_name    = "my_lambda_one"
   role             = aws_iam_role.lambda_role.arn
   handler          = "index.handler"
   runtime          = "python3.9"
@@ -54,7 +54,7 @@ resource "aws_lambda_function" "my_lambda" {
 
 resource "aws_lambda_function" "my_lambda_two" {
   filename         = data.archive_file.lambda_zip.output_path
-  function_name    = "my_second_lambda"
+  function_name    = "my_lambda_two"
   role             = aws_iam_role.lambda_role.arn
   handler          = "index.handler_two"
   runtime          = "python3.9"
