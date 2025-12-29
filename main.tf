@@ -8,6 +8,15 @@ resource "aws_s3_bucket" "my_data_bucket" {
     Environment = "Dev"
   }
 }
+resource "aws_s3_bucket" "my_data_bucket" {
+  # The bucket name must be globally unique across all AWS users
+  bucket = "my-unique-terraform-bucket-2025-12-29" 
+
+  tags = {
+    Name        = "My Terraform Bucket"
+    Environment = "Dev"
+  }
+}
 
 
 # Optional: Best practice to block public access
