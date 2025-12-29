@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "my_data_bucket" {
     Environment = "Dev"
   }
 }
-resource "aws_s3_bucket" "my_data_bucket" {
+resource "aws_s3_bucket" "my_data_bucket_two" {
   # The bucket name must be globally unique across all AWS users
   bucket = "my-unique-terraform-bucket-2025-12-29" 
 
